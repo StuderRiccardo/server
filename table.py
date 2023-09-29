@@ -39,8 +39,6 @@ con.execute("""
    ('122','Matteo','Nastro','5F inf'),
    ('123','Matteo','Pellas','5F inf'),
    ('124','Riccardo','Studer','5F inf')
-
-
 """)
 con.commit()
 con.close()
