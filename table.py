@@ -1,9 +1,6 @@
 import sqlite3
 con = sqlite3.connect("tutorial.db")
 
-
-
-
 con.execute("""
 create table students (
   Codmatricola char(3) primary key not null,
@@ -41,4 +38,35 @@ con.execute("""
    ('124','Riccardo','Studer','5F inf')
 """)
 con.commit()
+con.execute("""
+  create table prof(
+    Codprof char(3) primary key not null,
+    name varchar(15) not null,
+    surname varchar(30)
+
+  )
+""")
+con.execute(
+  """
+  insert into prof values(
+    ('001','Fabio','Malizia'),
+    ('002','Maria','Astarita'),
+    ('003','Giuseppe','Reina'),
+  )
+  """
+)
+con.commit()
+con.execute(
+  """
+  create table class(
+    section varchar(10) not null,
+    aula char(2) not null,
+    codprof char(3) not null,
+    foreign key (codprof) references prof(Codprof)
+    
+  )
+  
+  """
+)
+
 con.close()
