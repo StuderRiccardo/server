@@ -27,11 +27,11 @@ def get_entry_exit():
     esc = c.fetchall()
     con.close()
     return jsonify({'movimento': esc})
-def change():
+def showClass():
     con = sqlite3.connect('tutorial.db')
     c = con.cursor()
     c.execute("""
-
+        select 
 
     """
     )

@@ -1,13 +1,17 @@
 import sqlite3
 con = sqlite3.connect("tutorial.db")
-
+con.execute("""
+  drop table students
+""")
+con.commit()
 con.execute("""
 create table students (
   Codmatricola char(3) primary key not null,
   name varchar(15) not null,
   surname varchar(30),
-  class varchar(10)
-);
+  class varchar(10),
+  foreing key(class) references class(section)
+)
 """)
 con.commit()
 con.execute("""
@@ -43,7 +47,7 @@ con.execute("""
     Codprof char(3) primary key not null,
     name varchar(15) not null,
     surname varchar(30)
-
+    
   )
 """)
 con.execute(
@@ -59,14 +63,25 @@ con.commit()
 con.execute(
   """
   create table class(
-    section varchar(10) not null,
-    aula char(2) not null,
-    codprof char(3) not null,
-    foreign key (codprof) references prof(Codprof)
+    section varchar(10) primary key,
+    aula char(2) not null
     
   )
   
   """
 )
-
+con.commit()
+con.execute(
+  """
+  create table insegna(
+    codP char(10) primary key,
+    Naula char(2) not null,
+    primary key(codP,Naula),
+    foreing key(codP) references prof(codProf),
+    foreing key(Naula) references class(section)
+  )
+  
+  """
+)
+con.commit()
 con.close()
